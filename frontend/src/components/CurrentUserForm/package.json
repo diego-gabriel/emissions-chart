@@ -1,0 +1,7 @@
+{
+  "name": "CurrentUserForm",
+  "main": "CurrentUserForm.tsx",
+  "types": "CurrentUserForm.tsx",
+  "private": true,
+  "version": "1.0.0"
+}

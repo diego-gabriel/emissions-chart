@@ -1,8 +1,11 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from "react-redux";
+import ChartApp from "./components/ChartApp";
+import {store} from "./store/Store";
 
 ReactDOM.render(
-    <div>
-        <h1>Calliper chart</h1>
-    </div>, document.getElementById("root")
+    <Provider store={store}>
+        <ChartApp/>
+    </Provider>, document.getElementById("root")
 );
