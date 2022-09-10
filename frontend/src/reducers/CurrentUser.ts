@@ -17,17 +17,22 @@ interface UnsetUserAction {
 type CurrentUserAction = SetUserAction | UnsetUserAction;
 
 export const currentUserActions = {
-    setCurrentUser: (currentUser: CurrentUser): SetUserAction => ({ type: CurrentUserActionType.SET_USER, currentUser}),
-    unsetCurrentUser: (): UnsetUserAction => ({ type: CurrentUserActionType.UNSET_USER}),
-}
+    setCurrentUser: (currentUser: CurrentUser): SetUserAction => ({
+        type: CurrentUserActionType.SET_USER,
+        currentUser,
+    }),
+    unsetCurrentUser: (): UnsetUserAction => ({
+        type: CurrentUserActionType.UNSET_USER,
+    }),
+};
 
 export const currentUserReducer = (state: CurrentUser | null = null, action: CurrentUserAction) => {
     switch (action.type) {
-        case "SET_USER":
+        case 'SET_USER':
             return action.currentUser;
-        case "UNSET_USER":
+        case 'UNSET_USER':
             return null;
         default:
             return state;
     }
-}
+};
