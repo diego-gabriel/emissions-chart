@@ -4,7 +4,7 @@ import './CO2EmissionsChart.css';
 import bem from '../../utils/bem';
 import ClickableDot, { ClickableDotProps } from '../ClickableDot';
 import InteractiveTooltip from '../InteractiveTooltip';
-import { Position } from '../../utils/types';
+import { EmissionsData, Position } from '../../utils/types';
 
 const { bemElement } = bem('co2-emissions-chart');
 
@@ -33,7 +33,7 @@ const data = [
 
 type PossiblePosition = Position | undefined;
 
-export default function CO2EmissionsChart() {
+export default function CO2EmissionsChart(props: { data: EmissionsData }) {
     const [tooltipPosition, setTooltipPosition] = useState<PossiblePosition>(undefined);
     const [activeDotIndex, setActiveDotIndex] = useState(-1);
 
@@ -48,7 +48,7 @@ export default function CO2EmissionsChart() {
     };
 
     return (
-        <LineChart width={600} height={300} data={data} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+        <LineChart width={600} height={300} data={props.data} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
             <CartesianGrid stroke="#ccc" />
             <XAxis dataKey="year" />
             <YAxis />

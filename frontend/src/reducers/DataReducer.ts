@@ -29,5 +29,7 @@ export const dataReducer = (state: EmissionsDataState = null, action: DataAction
             return 'loading';
         case DataActionType.GET_DATA_SUCCESS:
             return action.data;
+        default:
+            return state;
     }
 };
