@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from backend.database import connection
+from backend.database import database_connection
 from backend.statics.paths import SQLITE_TEST_FILE
 
 
@@ -14,7 +14,7 @@ def delete_database_file():
 @pytest.fixture(autouse=True)
 def ensure_clean_database():
     delete_database_file()
-    connection.initialize(SQLITE_TEST_FILE)
+    database_connection.initialize(SQLITE_TEST_FILE)
     yield
 
     delete_database_file()

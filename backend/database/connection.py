@@ -1,21 +1,21 @@
 import sqlite3
-from sqlite3 import Error
 
 from backend.statics.paths import SQLITE_FILE
 
-# print(os.environ)
 
 class DatabaseConnection:
+    def __init__(self):
+        self._database_file = None
+
+    def _create_connection(self):
+        if self._database_file is None:
+            raise "Database not initialized"
+
+        return sqlite3.connect(self._database_file)
+
     def initialize(self, database_file: str = SQLITE_FILE):
-        try:
-            self.connection = sqlite3.connect(database_file)
-        except Error as error:
-            print(error)
-
+        self._database_file = database_file
         self._ensure_tables()
-
-    def __del__(self):
-        self.connection.close()
 
     def _ensure_tables(self):
         create_comments_table_query = """
@@ -31,13 +31,9 @@ class DatabaseConnection:
         self.execute_query(create_comments_table_query)
 
     def execute_query(self, query: str, params: any = None):
-        cursor = self.connection.cursor()
-        try:
+        with self._create_connection() as connection:
+            cursor = connection.cursor()
             cursor.execute(query, params or [])
-            self.connection.commit()
-        except Error as error:
-            print("Could not execute query", query, error)
-            raise
 
         return cursor
 
@@ -45,15 +41,11 @@ class DatabaseConnection:
         return self.execute_query(query, params).lastrowid
 
     def execute_read_query(self, query: str, params: any = None):
-        cursor = self.connection.cursor()
-
-        try:
+        with self._create_connection() as connection:
+            cursor = connection.cursor()
             cursor.execute(query, params or [])
-            result = cursor.fetchall()
-        except Error as error:
-            print(error)
-            raise
 
-        return result
+        return cursor.fetchall()
 
-connection = DatabaseConnection()
+
+database_connection = DatabaseConnection()

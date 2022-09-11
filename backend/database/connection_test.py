@@ -1,4 +1,4 @@
-from backend.database import connection
+from backend.database import database_connection as connection
 
 
 class TestConnection:
