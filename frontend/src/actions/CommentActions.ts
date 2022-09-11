@@ -26,7 +26,7 @@ interface PostCommentSuccessAction {
     newComment: Comment;
 }
 
-export const dataActions = {
+export const commentActions = {
     getComments: () => ({ type: CommentActionType.GET_COMMENTS }),
     getCommentsSuccess: (comments: Array<Comment>) => ({ type: CommentActionType.GET_COMMENTS_SUCCESS, comments }),
     postComments: (data: Omit<Comment, 'id'>) => ({ type: CommentActionType.POST_COMMENT, data }),
