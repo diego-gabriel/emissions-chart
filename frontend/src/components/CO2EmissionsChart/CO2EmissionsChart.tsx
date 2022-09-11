@@ -6,7 +6,7 @@ import ClickableDot, { ClickableDotProps } from '../ClickableDot';
 import InteractiveTooltip from '../InteractiveTooltip';
 import { EmissionsData, Position } from '../../utils/types';
 
-const { bemElement } = bem('co2-emissions-chart');
+const { bemBlock } = bem('co2-emissions-chart');
 
 type PossiblePosition = Position | undefined;
 
@@ -25,24 +25,27 @@ export default function CO2EmissionsChart(props: { data: EmissionsData }) {
     };
 
     return (
-        <LineChart width={600} height={300} data={props.data} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
-            <CartesianGrid stroke="#ccc" />
-            <XAxis dataKey="year" />
-            <YAxis />
-            <Tooltip
-                position={tooltipPosition}
-                wrapperStyle={{
-                    outline: 'none',
-                }}
-                content={<InteractiveTooltip forceVisible={!!tooltipPosition} onCloseClicked={closeTooltip} />}
-            />
-            <Line
-                type="monotone"
-                dataKey="emissions"
-                stroke="#8884d8"
-                dot={<ClickableDot onClick={onDotClick} activeIndex={activeDotIndex} />}
-                activeDot={false}
-            />
-        </LineChart>
+        <div className={bemBlock()}>
+            <h1>CO2 and greenhouse gas emissions per-capita in the EU</h1>
+            <LineChart width={600} height={300} data={props.data} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+                <CartesianGrid stroke="#ccc" />
+                <XAxis dataKey="year" />
+                <YAxis unit="tons"/>
+                <Tooltip
+                    position={tooltipPosition}
+                    wrapperStyle={{
+                        outline: 'none',
+                    }}
+                    content={<InteractiveTooltip forceVisible={!!tooltipPosition} onCloseClicked={closeTooltip} />}
+                />
+                <Line
+                    type="monotone"
+                    dataKey="emissions"
+                    stroke="#8884d8"
+                    dot={<ClickableDot onClick={onDotClick} activeIndex={activeDotIndex} />}
+                    activeDot={false}
+                />
+            </LineChart>
+        </div>
     );
 }
