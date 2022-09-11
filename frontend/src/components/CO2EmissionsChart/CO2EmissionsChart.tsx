@@ -24,6 +24,8 @@ export default function CO2EmissionsChart(props: { data: EmissionsData }) {
         setActiveDotIndex(-1);
     };
 
+    const tooltipShouldBeVisible = !!tooltipPosition;
+
     return (
         <div className={bemBlock()}>
             <h1>CO2 and greenhouse gas emissions per-capita in the EU</h1>
@@ -36,13 +38,19 @@ export default function CO2EmissionsChart(props: { data: EmissionsData }) {
                     wrapperStyle={{
                         outline: 'none',
                     }}
-                    content={<InteractiveTooltip forceVisible={!!tooltipPosition} onCloseClicked={closeTooltip} />}
+                    content={<InteractiveTooltip forceVisible={tooltipShouldBeVisible} onCloseClicked={closeTooltip} />}
                 />
                 <Line
                     type="monotone"
                     dataKey="emissions"
                     stroke="#8884d8"
-                    dot={<ClickableDot onClick={onDotClick} activeIndex={activeDotIndex} />}
+                    dot={
+                        <ClickableDot
+                            showCount={!tooltipShouldBeVisible}
+                            onClick={onDotClick}
+                            activeIndex={activeDotIndex}
+                        />
+                    }
                     activeDot={false}
                 />
             </LineChart>
