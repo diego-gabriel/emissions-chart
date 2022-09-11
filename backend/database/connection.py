@@ -1,60 +1,59 @@
-import os
 import sqlite3
-from sqlite3 import Error, Connection
+from sqlite3 import Error
 
-from backend.statics.paths import SQLITE_FILE, SQLITE_TEST_FILE
+from backend.statics.paths import SQLITE_FILE
 
+# print(os.environ)
 
-def create_connection():
-    connection = None
-    print(os.environ)
-    try:
-        connection = sqlite3.connect(SQLITE_TEST_FILE if "PYTEST_CURRENT_TEST" in os.environ else SQLITE_FILE)
-    except Error as error:
-        print(error)
+class DatabaseConnection:
+    def initialize(self, database_file: str = SQLITE_FILE):
+        try:
+            self.connection = sqlite3.connect(database_file)
+        except Error as error:
+            print(error)
 
-    _ensure_tables(connection)
+        self._ensure_tables()
 
-    return connection
+    def __del__(self):
+        self.connection.close()
 
+    def _ensure_tables(self):
+        create_comments_table_query = """
+        CREATE TABLE IF NOT EXISTS Comments (
+            text TEXT NOT NULL,
+            username TEXT NOT NULL,
+            parent_id INTEGER,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            FOREIGN KEY (parent_id) REFERENCES Comments(id) 
+        )
+        """
 
-def execute_query(connection: Connection, query: str, params: any = None):
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query, params or [])
-        connection.commit()
-    except Error as error:
-        print("Could not execute query", query, error)
-        raise
+        self.execute_query(create_comments_table_query)
 
-    return cursor
+    def execute_query(self, query: str, params: any = None):
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute(query, params or [])
+            self.connection.commit()
+        except Error as error:
+            print("Could not execute query", query, error)
+            raise
 
+        return cursor
 
-def execute_insert_query(connection: Connection, query: str, params: any = None):
-    return execute_query(connection, query, params).lastrowid
+    def execute_insert_query(self, query: str, params: any = None):
+        return self.execute_query(query, params).lastrowid
 
+    def execute_read_query(self, query: str, params: any = None):
+        cursor = self.connection.cursor()
 
-def execute_read_query(connection: Connection, query: str, params: any = None):
-    cursor = connection.cursor()
-    result = None
-    try:
-        cursor.execute(query, params or [])
-        result = cursor.fetchall()
-    except Error as error:
-        print(error)
-        raise
+        try:
+            cursor.execute(query, params or [])
+            result = cursor.fetchall()
+        except Error as error:
+            print(error)
+            raise
 
-    return result
+        return result
 
-def _ensure_tables(connection: Connection):
-    create_comments_table_query = """
-    CREATE TABLE IF NOT EXISTS Comments (
-        text TEXT NOT NULL,
-        username TEXT NOT NULL,
-        parent_id INTEGER,
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        FOREIGN KEY (parent_id) REFERENCES Comments(id) 
-    )
-    """
-
-    execute_query(connection, create_comments_table_query)
+connection = DatabaseConnection()

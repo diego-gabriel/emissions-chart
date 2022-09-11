@@ -1,11 +1,11 @@
-from backend.database import create_connection, execute_read_query
+from backend.database import connection
+
 
 class TestConnection:
-    def test_creates_and_configures_connection(self) -> None:
-        connection = create_connection()
+    def test_connection_is_created_and_configured(self) -> None:
         assert connection is not None
 
-        result = execute_read_query(connection, "SELECT name FROM sqlite_master WHERE type='table'")
+        result = connection.execute_read_query("SELECT name FROM sqlite_master WHERE type='table'")
         tables = [table for (table, *_) in result]
 
         assert "Comments" in tables
