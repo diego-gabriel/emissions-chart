@@ -7,3 +7,7 @@
 .clickable-dot--focused {
     r: 8px;
 }
+
+.clickable-dot__text {
+    text-anchor: middle;
+}
