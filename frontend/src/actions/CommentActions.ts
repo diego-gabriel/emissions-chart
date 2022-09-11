@@ -32,3 +32,5 @@ export const commentActions = {
     postComments: (data: Omit<Comment, 'id'>) => ({ type: CommentActionType.POST_COMMENT, data }),
     postCommentsSuccess: (newComment: Comment) => ({ type: CommentActionType.POST_COMMENT_SUCCESS, newComment }),
 };
+
+export type CommentAction = GetCommentsAction | GetCommentsSuccessAction | PostCommentAction | PostCommentSuccessAction;
