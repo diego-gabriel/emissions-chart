@@ -1,0 +1,7 @@
+{
+    "name": "NewCommentForm",
+    "main": "NewCommentForm.tsx",
+    "types": "NewCommentForm.tsx",
+    "private": true,
+    "version": "1.0.0"
+}

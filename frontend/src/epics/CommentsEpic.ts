@@ -21,7 +21,7 @@ const postCommentEpic: Epic<AnyAction, AnyAction, State> = (actionStream$) =>
         filter((action) => action.type === CommentActionType.POST_COMMENT),
         mergeMap((action) =>
             ajax
-                .post('/comments', action.data)
+                .post('http://127.0.0.1:8000/comments', action.data)
                 .pipe(map(({ response }) => commentActions.postCommentsSuccess(response as Comment)))
         )
     );

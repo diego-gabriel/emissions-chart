@@ -1,7 +1,6 @@
 .interactive-tooltip {
     display: flex;
     flex-direction: column;
-    gap: 8px;
     visibility: visible !important;
     pointer-events: all;
     border: 1px solid darkgrey;
@@ -30,4 +29,8 @@
 
 .interactive-tooltip__close-button:active {
     color: dimgrey;
+}
+
+.interactive-tooltip__comment-count {
+    font-weight: bold;
 }

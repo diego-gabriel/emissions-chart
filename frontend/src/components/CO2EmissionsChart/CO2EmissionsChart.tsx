@@ -12,16 +12,16 @@ type PossiblePosition = Position | undefined;
 
 export default function CO2EmissionsChart(props: { data: EmissionsData }) {
     const [tooltipPosition, setTooltipPosition] = useState<PossiblePosition>(undefined);
-    const [activeDotIndex, setActiveDotIndex] = useState(-1);
+    const [activeDataIndex, setActiveDataIndex] = useState(-1);
 
     const onDotClick = (dotProps: ClickableDotProps) => {
         setTooltipPosition({ x: dotProps.cx, y: dotProps.cy });
-        setActiveDotIndex(dotProps.index);
+        setActiveDataIndex(dotProps.index);
     };
 
     const closeTooltip = () => {
         setTooltipPosition(undefined);
-        setActiveDotIndex(-1);
+        setActiveDataIndex(-1);
     };
 
     const tooltipShouldBeVisible = !!tooltipPosition;
@@ -38,7 +38,13 @@ export default function CO2EmissionsChart(props: { data: EmissionsData }) {
                     wrapperStyle={{
                         outline: 'none',
                     }}
-                    content={<InteractiveTooltip forceVisible={tooltipShouldBeVisible} onCloseClicked={closeTooltip} />}
+                    content={
+                        <InteractiveTooltip
+                            forceVisible={tooltipShouldBeVisible}
+                            onCloseClicked={closeTooltip}
+                            dataIndex={activeDataIndex}
+                        />
+                    }
                 />
                 <Line
                     type="monotone"
@@ -48,7 +54,7 @@ export default function CO2EmissionsChart(props: { data: EmissionsData }) {
                         <ClickableDot
                             showCount={!tooltipShouldBeVisible}
                             onClick={onDotClick}
-                            activeIndex={activeDotIndex}
+                            activeIndex={activeDataIndex}
                         />
                     }
                     activeDot={false}

@@ -1,24 +1,22 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../../store/Store';
-import CurrentUserForm from '../CurrentUserForm';
+
 import CO2EmissionsChart from '../CO2EmissionsChart';
 import { dataSelectors } from '../../selectors/dataSelectors';
 import { dataActions } from '../../actions/DataActions';
+import { commentActions } from '../../actions/CommentActions';
 export default function ChartApp() {
     const dispatch = useDispatch();
-    const currentUser = useSelector((state: State) => state.currentUser);
-    const greeting = currentUser ? `This is ${currentUser}.` : 'No user given.';
     const data = useSelector(dataSelectors.getData);
 
     useEffect(() => {
         dispatch(dataActions.getData());
+        dispatch(commentActions.getComments());
     }, [dispatch]);
 
     return (
         <>
-            <h1>Hello Calliper! {greeting}</h1>
-            <CurrentUserForm />
+            <h1>Hello Calliper!</h1>
             {data && data !== 'loading' ? <CO2EmissionsChart data={data} /> : data}
         </>
     );
