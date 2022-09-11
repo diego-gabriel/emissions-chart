@@ -1,6 +1,6 @@
 import { EmissionsData } from '../utils/types';
 
-enum DataActionType {
+export enum DataActionType {
     GET_DATA = 'GET_DATA',
     GET_DATA_SUCCESS = 'GET_DATA_SUCCESS',
 }
@@ -19,7 +19,7 @@ export const dataActions = {
     getDataSuccess: (data: EmissionsData) => ({ type: DataActionType.GET_DATA_SUCCESS, data }),
 };
 
-type DataAction = GetDataAction | GetDataSuccessAction;
+export type DataAction = GetDataAction | GetDataSuccessAction;
 
 type EmissionsDataState = EmissionsData | 'loading' | null;
 
