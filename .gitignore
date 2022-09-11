@@ -1,4 +1,5 @@
 .idea
 frontend/dist
 node_modules
+__pycache__
 
