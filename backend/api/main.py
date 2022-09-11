@@ -37,16 +37,18 @@ def read_data():
 class CommentData(BaseModel):
     username: str
     text: str
+    data_id: int
     parent_id: int | None
 
 
 @app.post("/comments", status_code=201)
 def post_comment(*, comment_data: CommentData):
-    new_comment = Comments.create(comment_data.text, comment_data.username, comment_data.parent_id)
+    new_comment = Comments.create(comment_data.text, comment_data.username, comment_data.data_id, comment_data.parent_id)
 
     return {
         "id": new_comment.id,
         "text": new_comment.text,
         "username": new_comment.username,
+        "data_id": new_comment.data_id,
         "parent_id": new_comment.parent_id,
     }

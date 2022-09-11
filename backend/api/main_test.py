@@ -11,6 +11,7 @@ class TestComments:
         data = {
             "text": "Awesome comment",
             "username": "Alice",
+            "data_id": 3,
         }
         response = client.post("/comments", json=data)
         json_response = response.json()
@@ -18,6 +19,7 @@ class TestComments:
         assert response.status_code == 201
         assert json_response["text"] == data["text"]
         assert json_response["username"] == data["username"]
+        assert json_response["data_id"] == data["data_id"]
         assert json_response["parent_id"] is None
         assert json_response["id"] is not None
 

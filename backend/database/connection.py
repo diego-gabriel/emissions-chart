@@ -22,6 +22,7 @@ class DatabaseConnection:
         CREATE TABLE IF NOT EXISTS Comments (
             text TEXT NOT NULL,
             username TEXT NOT NULL,
+            data_id INTEGER NOT NULL,
             parent_id INTEGER,
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             FOREIGN KEY (parent_id) REFERENCES Comments(id) 
