@@ -1,6 +1,5 @@
 import { EmissionsData } from '../utils/types';
-import {DataAction, DataActionType} from "../actions/DataActions";
-
+import { DataAction, DataActionType } from '../actions/DataActions';
 
 type EmissionsDataState = EmissionsData | 'loading' | null;
 

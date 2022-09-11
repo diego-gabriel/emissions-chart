@@ -4,7 +4,7 @@ import { State } from '../../store/Store';
 import CurrentUserForm from '../CurrentUserForm';
 import CO2EmissionsChart from '../CO2EmissionsChart';
 import { dataSelectors } from '../../selectors/dataSelectors';
-import {dataActions} from "../../actions/DataActions";
+import { dataActions } from '../../actions/DataActions';
 export default function ChartApp() {
     const dispatch = useDispatch();
     const currentUser = useSelector((state: State) => state.currentUser);
