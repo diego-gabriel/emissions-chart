@@ -1,4 +1,7 @@
 .interactive-tooltip {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     visibility: visible !important;
     pointer-events: all;
 }

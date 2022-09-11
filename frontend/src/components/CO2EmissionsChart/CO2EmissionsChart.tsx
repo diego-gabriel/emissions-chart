@@ -54,6 +54,9 @@ export default function CO2EmissionsChart() {
             <YAxis />
             <Tooltip
                 position={tooltipPosition}
+                wrapperStyle={{
+                    outline: 'none',
+                }}
                 content={<InteractiveTooltip forceVisible={!!tooltipPosition} onCloseClicked={closeTooltip} />}
             />
             <Line
