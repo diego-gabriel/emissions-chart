@@ -4,4 +4,8 @@
     gap: 8px;
     visibility: visible !important;
     pointer-events: all;
+    border: 1px solid darkgrey;
+    border-radius: 4px;
+    background-color: cornsilk;
+    padding: 12px;
 }
