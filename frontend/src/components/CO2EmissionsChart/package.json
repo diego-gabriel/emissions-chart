@@ -1,0 +1,7 @@
+{
+    "name": "CO2EmissionsChart",
+    "main": "CO2EmissionsChart.tsx",
+    "types": "CO2EmissionsChart.tsx",
+    "private": true,
+    "version": "1.0.0"
+}

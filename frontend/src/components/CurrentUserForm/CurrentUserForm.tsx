@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { currentUserActions } from '../../reducers/CurrentUser';
-import bem from "../../utils/bem";
-import "./CurrentUserForm.css";
+import bem from '../../utils/bem';
+import './CurrentUserForm.css';
 
-const {bemBlock, bemElement} = bem('current-user-form');
+const { bemBlock, bemElement } = bem('current-user-form');
 
 export default function CurrentUserForm() {
     const dispatch = useDispatch();
