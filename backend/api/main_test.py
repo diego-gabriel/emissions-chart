@@ -24,3 +24,27 @@ class TestComments:
         assert json_response["id"] is not None
 
         assert Comments.find(json_response["id"]).text == data["text"]
+
+    def test_get_controller_empty(self) -> None:
+        response = client.get("/comments")
+        json_response = response.json()
+
+        assert response.status_code == 200
+        assert len(json_response) == 0
+
+    def test_get_controller_with_comments(self) -> None:
+        for i in range(5):
+            Comments.create("Some comment", "Bob", i, None)
+
+        response = client.get("/comments")
+        json_response = response.json()
+
+        assert response.status_code == 200
+        assert len(json_response) == 5
+        assert { comment["data_id"] for comment in json_response } == { 0, 1, 2, 3, 4}
+
+        for i in range(5):
+            assert json_response[i]["text"] == "Some comment"
+            assert json_response[i]["username"] == "Bob"
+            assert json_response[i]["text"] == "Some comment"
+            assert json_response[i]["parent_id"] is None

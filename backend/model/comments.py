@@ -10,6 +10,15 @@ class Comment:
     parent_id: int | None
     id: int | None = None
 
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "text": self.text,
+            "username": self.username,
+            "data_id": self.data_id,
+            "parent_id": self.parent_id,
+        }
+
 
 class Comments:
     @staticmethod

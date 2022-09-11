@@ -45,10 +45,9 @@ class CommentData(BaseModel):
 def post_comment(*, comment_data: CommentData):
     new_comment = Comments.create(comment_data.text, comment_data.username, comment_data.data_id, comment_data.parent_id)
 
-    return {
-        "id": new_comment.id,
-        "text": new_comment.text,
-        "username": new_comment.username,
-        "data_id": new_comment.data_id,
-        "parent_id": new_comment.parent_id,
-    }
+    return new_comment.as_dict()
+
+
+@app.get('/comments', status_code=200)
+def get_comments():
+    return [comment.as_dict() for comment in Comments.all()]
