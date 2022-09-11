@@ -1,11 +1,9 @@
 from backend.database import create_connection
 from backend.model import Comments
-from backend.statics.paths import SQLITE_TEST_FILE
-
 
 class TestComments:
     def setup(self) -> None:
-        self.connection = create_connection(SQLITE_TEST_FILE)
+        self.connection = create_connection()
 
     def test_create_comments(self) -> None:
         comment = Comments.create(self.connection, "foo", "bob", None)

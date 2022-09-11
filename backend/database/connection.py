@@ -1,14 +1,15 @@
+import os
 import sqlite3
 from sqlite3 import Error, Connection
 
-from backend.statics.paths import SQLITE_FILE
+from backend.statics.paths import SQLITE_FILE, SQLITE_TEST_FILE
 
 
-def create_connection(database_file = SQLITE_FILE):
+def create_connection():
     connection = None
-
+    print(os.environ)
     try:
-        connection = sqlite3.connect(database_file)
+        connection = sqlite3.connect(SQLITE_TEST_FILE if "PYTEST_CURRENT_TEST" in os.environ else SQLITE_FILE)
     except Error as error:
         print(error)
 
