@@ -4,11 +4,11 @@ from sqlite3 import Error, Connection
 from backend.statics.paths import SQLITE_FILE
 
 
-def create_connection():
+def create_connection(database_file = SQLITE_FILE):
     connection = None
 
     try:
-        connection = sqlite3.connect(SQLITE_FILE)
+        connection = sqlite3.connect(database_file)
     except Error as error:
         print(error)
 
@@ -24,6 +24,18 @@ def execute_query(connection: Connection, query: str):
         connection.commit()
     except Error as error:
         print(error)
+
+
+def execute_read_query(connection: Connection, query: str):
+    cursor = connection.cursor()
+    result = None
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+    except Error as error:
+        print(error)
+
+    return result
 
 def _ensure_tables(connection: Connection):
     create_comments_table_query = """
