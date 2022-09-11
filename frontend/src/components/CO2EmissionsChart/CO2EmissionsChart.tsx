@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from 'react';
-import { CartesianGrid, Dot, DotProps, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import React, { useState } from 'react';
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import './CO2EmissionsChart.css';
 import bem from '../../utils/bem';
+import ClickableDot, { ClickableDotProps } from '../ClickableDot';
 
 const { bemElement } = bem('co2-emissions-chart');
 
@@ -37,31 +38,15 @@ interface Position {
     y: number;
 }
 
-interface ActiveDotProps {
-    visible: boolean;
-}
-
-function Dot(props: ActiveDotProps & DotProps) {
-    const { bemBlock, bemElement } = bem('dot');
-
-    const [hasFocus, setHasFocus] = useState(false);
-
-    const onClick = (event) => {
-        console.log(event);
-        setHasFocus(true);
-        props.onClick(props, event);
-    };
-
-    return <circle className={bemBlock({ focused: hasFocus })} cx={props.cx} cy={props.cy} onClick={onClick} />;
-}
-
 type PossiblePosition = Position | undefined;
 
 export default function CO2EmissionsChart() {
     const [tooltipPosition, setTooltipPosition] = useState<PossiblePosition>(undefined);
+    const [activeDotIndex, setActiveDotIndex] = useState(-1);
 
-    const onDotClick: DotProps['onClick'] = (dotProps, event) => {
+    const onDotClick = (dotProps: ClickableDotProps, event: any) => {
         setTooltipPosition({ x: dotProps.cx, y: dotProps.cy });
+        setActiveDotIndex(dotProps.index);
     };
 
     return (
@@ -74,7 +59,7 @@ export default function CO2EmissionsChart() {
                 type="monotone"
                 dataKey="emissions"
                 stroke="#8884d8"
-                dot={<Dot visible={true} onClick={onDotClick} />}
+                dot={<ClickableDot onClick={onDotClick} activeIndex={activeDotIndex} />}
                 activeDot={false}
             />
         </LineChart>

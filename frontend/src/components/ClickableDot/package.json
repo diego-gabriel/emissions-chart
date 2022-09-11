@@ -1,0 +1,7 @@
+{
+    "name": "ClickableDot",
+    "main": "ClickableDot.tsx",
+    "types": "ClickableDot.tsx",
+    "private": true,
+    "version": "1.0.0"
+}

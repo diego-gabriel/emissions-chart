@@ -1,0 +1,9 @@
+.clickable-dot {
+    cursor: pointer;
+    r: 4px;
+}
+
+.clickable-dot:hover,
+.clickable-dot--focused {
+    r: 8px;
+}

@@ -1,16 +1,3 @@
-.dot {
-    cursor: pointer;
-    r: 4px;
-}
-
-.dot:hover {
-    r: 8px;
-}
-
-.dot--focused {
-    r: 8px;
-}
-
 .custom-tooltip {
     visibility: visible !important;
 }
