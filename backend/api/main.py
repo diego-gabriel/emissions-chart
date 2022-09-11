@@ -1,9 +1,9 @@
-import csv
 import json
-import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+from backend.statics.paths import EMISSIONS_DATA_FILE
 
 app = FastAPI()
 
@@ -25,8 +25,6 @@ def read_data():
     for the European Union (28) countries after 1900.
     Source https://ourworldindata.org/co2/country/germany?country=~DEU"""
 
-    filename = os.path.join(os.path.dirname(__file__), "../../data/co-emissions-per-capita.json")
-
-    with open(filename) as data_file:
+    with open(EMISSIONS_DATA_FILE) as data_file:
         data = json.load(data_file)
     return data
