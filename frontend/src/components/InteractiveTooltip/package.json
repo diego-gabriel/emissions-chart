@@ -1,0 +1,7 @@
+{
+    "name": "InteractiveTooltip",
+    "main": "InteractiveTooltip.tsx",
+    "types": "InteractiveTooltip.tsx",
+    "private": true,
+    "version": "1.0.0"
+}

@@ -1,0 +1,4 @@
+.interactive-tooltip {
+    visibility: visible !important;
+    pointer-events: all;
+}
