@@ -1,10 +1,10 @@
 import { Epic } from 'redux-observable';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
-import { dataActions, DataActionType } from '../reducers/DataReducer';
 import { State } from '../store/Store';
 import { AnyAction } from 'redux';
 import { EmissionsData } from '../utils/types';
+import {dataActions, DataActionType} from "../actions/DataActions";
 
 export const dataEpic: Epic<AnyAction, AnyAction, State> = (actionStream$) =>
     actionStream$.pipe(

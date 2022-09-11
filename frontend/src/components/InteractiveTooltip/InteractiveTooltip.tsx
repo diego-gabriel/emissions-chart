@@ -3,7 +3,7 @@ import './InteractiveTooltip.css';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { TooltipProps } from 'recharts';
 import bem from '../../utils/bem';
-import { MdClear } from 'react-icons/all';
+import { MdClear } from 'react-icons/md';
 
 const { bemBlock, bemElement } = bem('interactive-tooltip');
 

@@ -3,4 +3,4 @@ export interface Position {
     y: number;
 }
 
-export type EmissionsData = Readonly<Array<{ emissions: number; year: number }>>;
+export type EmissionsData = Array<{ emissions: number; year: number }>;

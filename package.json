@@ -31,7 +31,7 @@
         "build:frontend": "webpack --config frontend/webpack.config.js",
         "build": "yarn build:frontend --watch",
         "test": "jest --config frontend/jest.config.ts",
-        "prettify": "yarn prettier --write $(git diff --name-only --cached)",
+        "pretty": "yarn prettier --write $(git diff --name-only --cached)",
         "install:backend": "pip install -r requirements.txt"
     }
 }
