@@ -7,5 +7,27 @@
     border: 1px solid darkgrey;
     border-radius: 4px;
     background-color: cornsilk;
-    padding: 12px;
+}
+
+.interactive-tooltip__content {
+    padding: 0 12px 12px 12px;
+}
+
+.interactive-tooltip__close-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px;
+}
+
+.interactive-tooltip__close-button {
+    cursor: pointer;
+    color: darkgrey;
+}
+
+.interactive-tooltip__close-button:hover {
+    color: grey;
+}
+
+.interactive-tooltip__close-button:active {
+    color: dimgrey;
 }

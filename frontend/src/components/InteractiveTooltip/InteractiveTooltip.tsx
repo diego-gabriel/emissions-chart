@@ -3,8 +3,9 @@ import './InteractiveTooltip.css';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { TooltipProps } from 'recharts';
 import bem from '../../utils/bem';
+import { MdClear } from 'react-icons/all';
 
-const { bemBlock } = bem('interactive-tooltip');
+const { bemBlock, bemElement } = bem('interactive-tooltip');
 
 interface Props {
     forceVisible: boolean;
@@ -18,10 +19,12 @@ export default function InteractiveTooltip<TValue extends ValueType, TName exten
 ) {
     return props.forceVisible ? (
         <div className={bemBlock()}>
-            <span>I am a custom tooltip</span>
-            <button type="button" onClick={props.onCloseClicked}>
-                Close
-            </button>
+            <div className={bemElement('close-button-wrapper')}>
+                <MdClear className={bemElement('close-button')} onClick={props.onCloseClicked} />
+            </div>
+            <div className={bemElement('content')}>
+                <span>I am a custom tooltip</span>
+            </div>
         </div>
     ) : null;
 }
