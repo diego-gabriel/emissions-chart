@@ -12,7 +12,7 @@ export default function NewCommentForm(props: { dataId: number }) {
     const [text, setText] = useState('');
 
     const onUserInputChange = (event: ChangeEvent<HTMLInputElement>) => setUsername(event.target.value);
-    const onTextInputChange = (event: ChangeEvent<HTMLInputElement>) => setText(event.target.value);
+    const onTextInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => setText(event.target.value);
 
     const dispatchPostComment = () => {
         const trimmedUsername = username.trim();
@@ -37,7 +37,12 @@ export default function NewCommentForm(props: { dataId: number }) {
             <input type="text" name="username" value={username} onChange={onUserInputChange} />
 
             <label htmlFor="comment-text">Comment:</label>
-            <input type="text" name="comment-text" value={text} onChange={onTextInputChange} />
+            <textarea
+                className={bemElement('text-area')}
+                name="comment-text"
+                value={text}
+                onChange={onTextInputChange}
+            />
 
             <button type="button" onClick={dispatchPostComment}>
                 Save comment

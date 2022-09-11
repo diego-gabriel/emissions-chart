@@ -6,6 +6,7 @@
     border: 1px solid darkgrey;
     border-radius: 4px;
     background-color: cornsilk;
+    width: 250px;
 }
 
 .interactive-tooltip__content {
@@ -33,4 +34,5 @@
 
 .interactive-tooltip__comment-count {
     font-weight: bold;
+    margin-bottom: 8px;
 }

@@ -1,0 +1,9 @@
+.comment-view {
+    padding-botton: 3px;
+    border-bottom: 1px solid darkgrey;
+    margin-bottom: 8px;
+}
+
+.comment-view__username {
+    font-weight: bold;
+}

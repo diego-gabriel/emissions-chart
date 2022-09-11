@@ -1,0 +1,7 @@
+{
+    "name": "CommentView",
+    "main": "CommentView.tsx",
+    "types": "CommentView.tsx",
+    "private": true,
+    "version": "1.0.0"
+}

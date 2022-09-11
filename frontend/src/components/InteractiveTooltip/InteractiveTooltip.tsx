@@ -4,7 +4,8 @@ import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipCont
 import { TooltipProps } from 'recharts';
 import bem from '../../utils/bem';
 import { MdClear } from 'react-icons/md';
-import NewCommentForm from '../NewCommentForm/NewCommentForm';
+import NewCommentForm from '../NewCommentForm';
+import CommentView from '../CommentView';
 import { useSelector } from 'react-redux';
 import { State } from '../../store/Store';
 import { commentSelectors } from '../../selectors/commentSelectors';
@@ -23,6 +24,7 @@ export default function InteractiveTooltip<TValue extends ValueType, TName exten
     props: InteractiveTooltipProps<TValue, TName>
 ) {
     const comments = useSelector((state: State) => commentSelectors.getCommentsByDataId(state, props.dataIndex));
+    const commentList = comments.map((comment) => <CommentView key={comment.id} comment={comment} />);
 
     return props.forceVisible ? (
         <div className={bemBlock()}>
@@ -30,9 +32,10 @@ export default function InteractiveTooltip<TValue extends ValueType, TName exten
                 <MdClear className={bemElement('close-button')} onClick={props.onCloseClicked} />
             </div>
             <div className={bemElement('content')}>
-                <span className={bemElement('comment-count')}>
+                <div className={bemElement('comment-count')}>
                     {comments.length} {comments.length == 1 ? 'Comment' : 'Comments'}
-                </span>
+                </div>
+                {commentList}
                 <NewCommentForm dataId={props.dataIndex} />
             </div>
         </div>
