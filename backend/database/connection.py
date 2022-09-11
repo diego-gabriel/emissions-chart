@@ -17,33 +17,41 @@ def create_connection(database_file = SQLITE_FILE):
     return connection
 
 
-def execute_query(connection: Connection, query: str):
+def execute_query(connection: Connection, query: str, params: any = None):
     cursor = connection.cursor()
     try:
-        cursor.execute(query)
+        cursor.execute(query, params or [])
         connection.commit()
     except Error as error:
-        print(error)
+        print("Could not execute query", query, error)
+        raise
+
+    return cursor
 
 
-def execute_read_query(connection: Connection, query: str):
+def execute_insert_query(connection: Connection, query: str, params: any = None):
+    return execute_query(connection, query, params).lastrowid
+
+
+def execute_read_query(connection: Connection, query: str, params: any = None):
     cursor = connection.cursor()
     result = None
     try:
-        cursor.execute(query)
+        cursor.execute(query, params or [])
         result = cursor.fetchall()
     except Error as error:
         print(error)
+        raise
 
     return result
 
 def _ensure_tables(connection: Connection):
     create_comments_table_query = """
     CREATE TABLE IF NOT EXISTS Comments (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
         text TEXT NOT NULL,
         username TEXT NOT NULL,
-        parent_id INTEGER NOT NULL,
+        parent_id INTEGER,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         FOREIGN KEY (parent_id) REFERENCES Comments(id) 
     )
     """
