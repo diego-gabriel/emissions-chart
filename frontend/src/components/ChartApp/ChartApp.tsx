@@ -21,11 +21,13 @@ export default function ChartApp() {
 
     return (
         <div className={bemBlock()}>
-            <div className={bemElement('header')}>
-                <h1>Hello Calliper!</h1>
-                <div>This isn't just a simple chart.</div>
-            </div>
-            {data && data !== 'loading' ? <CO2EmissionsChart data={data} /> : data}
+            <>
+                <div className={bemElement('header')}>
+                    <h1>Hello Calliper!</h1>
+                    <div>This isn't just a simple chart.</div>
+                </div>
+                {data && data !== 'loading' ? <CO2EmissionsChart data={data} /> : data}
+            </>
         </div>
     );
 }
