@@ -1,0 +1,9 @@
+.chart-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-app__header {
+    margin-bottom: 32px;
+}
