@@ -1,6 +1,9 @@
 .clickable-dot {
     cursor: pointer;
+    stroke: #8884d8;
+    fill: #8884d8;
     r: 4px;
+    transition: r 0.2s;
 }
 
 .clickable-dot:hover,

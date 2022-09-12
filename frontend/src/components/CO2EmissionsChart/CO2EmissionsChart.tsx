@@ -32,7 +32,7 @@ export default function CO2EmissionsChart(props: { data: EmissionsData }) {
             <LineChart width={600} height={300} data={props.data} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
                 <CartesianGrid stroke="#ccc" />
                 <XAxis dataKey="year" />
-                <YAxis unit="tons" />
+                <YAxis unit=" tons" />
                 <Tooltip
                     position={tooltipPosition}
                     wrapperStyle={{
